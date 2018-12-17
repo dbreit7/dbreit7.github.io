@@ -1,3 +1,5 @@
 node_modules
 *~
 
+/.vs/dirty-json/v15
+/.vs

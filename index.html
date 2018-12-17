@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+<html lang="en" ng-app="djson" class="ng-scope"><head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<style type="text/css">
+		@charset "UTF-8";
+
+		[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak, .ng-hide:not(.ng-animate) {
+			display: none !important;
+		}
+
+		ng\:form {
+			display: block;
+		}
+	</style>
+
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- jQuery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+	<!-- AngularJS -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-rc.4/angular.min.js"></script>
+
+	<!-- dirty-json bundle -->
+	<script src="assets/bundle.min.js"></script>
+
+
+</head>
+
+  <body>
+    <div class="container ng-scope" ng-controller="DemoCtrl">
+      <div class="row">
+	<div class="well">
+	  <h4>Dirty JSON Parser</h4>
+	  <p>Enter some JSON on the left side, press the button, and then see the parsed output on the right. Try some options from the dropdown menu to see illustrative examples. Of course, not every invalid JSON string will be parsed, but many will. See the project on <a href="http://github.com/RyanMarcus/dirty-json/">GitHub</a> for more information.</p>
+	</div>
+      </div>
+
+      <div class="row">
+	<div class="col-md-6">
+	  <h3>Input</h3>
+	  <form role="form" class="ng-pristine ng-valid">
+	    <div class="form-group">
+	      <select class="form-control ng-pristine ng-untouched ng-valid" ng-change="doSelection()" ng-model="selectedExample" ng-options="example.name for example in examples"><option value="0" selected="selected">Invalid JSON: embedded HTML</option><option value="1">Valid JSON: Simple</option><option value="2">Invalid JSON: Simple</option><option value="3">Valid JSON: Complex Object</option><option value="4">Invalid JSON: Complex Object</option><option value="5">Invalid JSON: With newlines</option><option value="6">Invalid JSON: Floats</option><option value="7">Invalid JSON: Non-quoted keys</option></select>
+	    </div>
+
+	    <div class="form-group">
+	      <textarea style="font-family:Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;" class="form-control ng-pristine ng-untouched ng-valid" rows="30" ng-model="input"></textarea>
+	    </div>
+	    <button type="button" class="btn btn-primary" ng-click="doParse()">Parse</button>
+	  </form>
+	</div>
+
+	<div class="col-md-6">
+	  <h3>Output</h3>
+	  <form role="form" class="ng-pristine ng-valid">
+	    <div class="form-group">
+	      <div ng-show="valid" class="ng-hide">
+		<span class="glyphicon glyphicon-ok"></span> Valid JSON, parsed by the dirty JSON parser
+	      </div>
+
+	      <div ng-hide="valid" class="">
+		<span class="glyphicon glyphicon-remove"></span> Invalid JSON, parsed by the dirty JSON parser
+	      </div>
+	    </div>
+
+	    <div class="form-group">
+	      <textarea style="font-family:Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;" class="form-control ng-pristine ng-untouched ng-valid" rows="30" ng-model="output"></textarea>
+	    </div>
+
+	  </form>
+	</div>
+      </div>
+    </div>
+
+
+    <br><br>
+    <div class="footer">
+      <div class="container">
+      </div>
+    </div>
+
+
+
+</body></html>
