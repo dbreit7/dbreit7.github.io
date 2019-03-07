@@ -13,10 +13,6 @@ npm install dirty-json
 
 A JSON parser that tries to handle non-conforming or otherwise invalid JSON.
 
-You can play around with a demo here: [http://rmarcus.info/dirty-json/](http://rmarcus.info/dirty-json)
-
-You might also be interested in [my blog post about the parser](http://rmarcus.info/blog/2014/10/05/dirty-json-parser.html).
-
 Turn this:
 
     [5, .5, 'single quotes', "quotes in "quotes" in quotes"]
@@ -24,60 +20,6 @@ Turn this:
 Into this:
 
     [5,0.5,"single quotes","quotes in \"quotes\" in quotes"]
-
-## Why?
-We all love JSON. But sometimes, out in that scary place called "the real world", we see something like this:
-
-    { "user": "<div class="user">Ryan</div>" }
-
-Or even something like this:
-
-    { user: '<div class="user">
-	Ryan
-	</div>' }
-
-While these are obviously cringe-worthy, we still want a way to parse them. `dirty-json` provides a library to do exactly that.
-
-## Examples
-`dirty-json` does not require object keys to be quoted, and can handle single-quoted value strings.
-
-```javascript
-const dJSON = require('dirty-json');
-const r = dJSON.parse("{ test: 'this is a test'}")
-console.log(JSON.stringify(r));
-
-// output: {"test":"this is a test"}
-```
-
-`dirty-json` can handle embedded quotes in strings.
-
-```javascript
-const dJSON = require('dirty-json');
-const r = dJSON.parse('{ "test": "some text "a quote" more text"}');
-console.log(JSON.stringify(r));
-
-// output: {"test":"some text \"aquote\" more text"}
-```
-
-`dirty-json` can handle newlines inside of a string.
-
-```javascript
-const dJSON = require('dirty-json');
-const r = dJSON.parse('{ "test": "each \n on \n new \n line"}');
-console.log(JSON.stringify(r));
-
-// output: {"test":"each \n on \n new \n line"}
-```
-
-## But what about THIS ambiguous example?
-Since `dirty-json` is handling malformed JSON, it will not always produce the result that you "think" it should. That's why you should only use this when you absolutely need it. Malformed JSON is malformed for a reason.
-
-## How does it work?
-Currently `dirty-json` uses a lexer [powered by lex](https://github.com/aaditmshah/lexer) and a hand-written `LR(1)` parser. It shouldn't be used in any environment that requires reliable or fast results.
-
-## Security concerns
-
-This package makes heavy use of regular expressions in its lexer. As a result, it may be vulnerable to a [REDOS attack](https://snyk.io/blog/redos-and-catastrophic-backtracking). Versions prior to `0.5.1` and after `0.0.5` were *definitely* vulnerable (thanks to [Jamie Davis](http://people.cs.vt.edu/~davisjam/) for pointing this out). I believe version `0.5.1` and later are safe, but since I do not know of any tool to verify a RegEx, I can't prove it. 
 
 ## License
 > Copyright 2018, 2016, 2015, 2014 Ryan Marcus
